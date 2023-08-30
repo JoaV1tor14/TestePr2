@@ -38,6 +38,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // cadastro
@@ -46,7 +48,7 @@
             this.cadastro.Location = new System.Drawing.Point(9, 314);
             this.cadastro.Name = "cadastro";
             this.cadastro.Size = new System.Drawing.Size(90, 23);
-            this.cadastro.TabIndex = 3;
+            this.cadastro.TabIndex = 5;
             this.cadastro.Text = "cadastro";
             this.cadastro.UseVisualStyleBackColor = false;
             this.cadastro.Click += new System.EventHandler(this.button1_Click);
@@ -98,6 +100,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(231, 20);
             this.textBox3.TabIndex = 1;
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // label3
             // 
@@ -129,6 +132,25 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Telefone";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.label5.Location = new System.Drawing.Point(6, 208);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(27, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "CPF";
+            // 
+            // maskedTextBox2
+            // 
+            this.maskedTextBox2.Location = new System.Drawing.Point(9, 224);
+            this.maskedTextBox2.Mask = "000.000.000-00";
+            this.maskedTextBox2.Name = "maskedTextBox2";
+            this.maskedTextBox2.Size = new System.Drawing.Size(231, 20);
+            this.maskedTextBox2.TabIndex = 4;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -137,6 +159,8 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(636, 362);
+            this.Controls.Add(this.maskedTextBox2);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.maskedTextBox1);
             this.Controls.Add(this.label3);
@@ -167,6 +191,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.MaskedTextBox maskedTextBox1;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.MaskedTextBox maskedTextBox2;
     }
 }
 
