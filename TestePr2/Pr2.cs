@@ -24,7 +24,7 @@ namespace TestePr2
             SqlCommand sqlCommand = new SqlCommand();
 
             sqlCommand.Connection = conexao.ReturnConnection();
-            sqlCommand.CommandText = @"INSERT INTO Cadastro VALUES(@Email,@Nome, @Senha, @Telefone, @CPF)";
+            sqlCommand.CommandText = @"INSERT INTO Cadastro VALUES(@Email, @Senha, @CPF,@Telefone,@Nome)";
 
             sqlCommand.Parameters.AddWithValue ("@Email", textBox3.Text);
             sqlCommand.Parameters.AddWithValue("@Nome", textBox1.Text);
@@ -33,6 +33,17 @@ namespace TestePr2
             sqlCommand.Parameters.AddWithValue("@CPF", maskedTextBox2.Text);
 
             sqlCommand.ExecuteNonQuery();
+
+            MessageBox.Show("Cadastrado com sucesso","AVISO",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Information);
+
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            maskedTextBox1.Clear();
+            maskedTextBox2.Clear();
+
             //MessageBox.Show(textBox1.Text + "\n" + textBox3.Text + "\n" + textBox2.Text + "\n" + maskedTextBox1.Text + "\n" + maskedTextBox2.Text,
             //                 "Cadastro Realizado",
             //                  MessageBoxButtons.OK,
