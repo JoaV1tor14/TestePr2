@@ -17,6 +17,50 @@ namespace TestePr2
         {
             InitializeComponent();
         }
+        private void UpdateListView()
+        {
+            ListView.Items.Clear();
+
+            Conexao conn = new Conexao();
+            SqlCommand sqlCom = new SqlCommand();
+
+            sqlCom.Connection = conn.ReturnConnection();
+            sqlCom.CommandText = "SELECT * FROM Cadastro";
+
+            try
+            {
+                SqlDataReader dr = sqlCom.ExecuteReader();
+
+                //Enquanto for possível continuar a leitura das linhas que foram retornadas na consulta, execute.
+                while (dr.Read())
+                {
+                    int id = (int)dr["ID"];
+                    string name = (string)dr["Nome"];
+                   
+                    string tel = (string)dr["Telefone"];
+                   
+
+                    ListViewItem lv = new ListViewItem(id.ToString());
+                    lv.SubItems.Add(name);
+                    
+                    lv.SubItems.Add(tel);
+                    
+                    
+                   ListView.Items.Add(lv);
+
+                }
+                dr.Close();
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
+            finally
+            {
+                conn.CloseConnection();
+            }
+        }
+    
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -44,6 +88,8 @@ namespace TestePr2
             maskedTextBox1.Clear();
             maskedTextBox2.Clear();
 
+            UpdateListView();
+
             //MessageBox.Show(textBox1.Text + "\n" + textBox3.Text + "\n" + textBox2.Text + "\n" + maskedTextBox1.Text + "\n" + maskedTextBox2.Text,
             //                 "Cadastro Realizado",
             //                  MessageBoxButtons.OK,
@@ -65,7 +111,7 @@ namespace TestePr2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+          UpdateListView();
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
