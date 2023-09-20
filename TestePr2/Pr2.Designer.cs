@@ -40,10 +40,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
-            this.ListView = new System.Windows.Forms.ListView();
+            this.lv = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Editar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cadastro
@@ -155,19 +156,21 @@
             this.maskedTextBox2.Size = new System.Drawing.Size(231, 20);
             this.maskedTextBox2.TabIndex = 4;
             // 
-            // ListView
+            // lv
             // 
-            this.ListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lv.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
-            this.ListView.HideSelection = false;
-            this.ListView.Location = new System.Drawing.Point(9, 378);
-            this.ListView.Name = "ListView";
-            this.ListView.Size = new System.Drawing.Size(202, 118);
-            this.ListView.TabIndex = 13;
-            this.ListView.UseCompatibleStateImageBehavior = false;
-            this.ListView.View = System.Windows.Forms.View.Details;
+            this.lv.HideSelection = false;
+            this.lv.Location = new System.Drawing.Point(9, 378);
+            this.lv.Name = "lv";
+            this.lv.Size = new System.Drawing.Size(202, 118);
+            this.lv.TabIndex = 13;
+            this.lv.UseCompatibleStateImageBehavior = false;
+            this.lv.View = System.Windows.Forms.View.Details;
+            this.lv.SelectedIndexChanged += new System.EventHandler(this.ListView_SelectedIndexChanged);
+            this.lv.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ListView_MouseDoubleClick);
             // 
             // columnHeader1
             // 
@@ -181,6 +184,17 @@
             // 
             this.columnHeader3.Text = "Telefone";
             // 
+            // Editar
+            // 
+            this.Editar.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.Editar.Location = new System.Drawing.Point(9, 343);
+            this.Editar.Name = "Editar";
+            this.Editar.Size = new System.Drawing.Size(90, 23);
+            this.Editar.TabIndex = 14;
+            this.Editar.Text = "Editar";
+            this.Editar.UseVisualStyleBackColor = false;
+            this.Editar.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -189,7 +203,8 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1451, 638);
-            this.Controls.Add(this.ListView);
+            this.Controls.Add(this.Editar);
+            this.Controls.Add(this.lv);
             this.Controls.Add(this.maskedTextBox2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -224,10 +239,11 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.MaskedTextBox maskedTextBox2;
-        private System.Windows.Forms.ListView ListView;
+        private System.Windows.Forms.ListView lv;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.Button Editar;
     }
 }
 

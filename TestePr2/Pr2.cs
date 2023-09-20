@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,13 +14,15 @@ namespace TestePr2
 {
     public partial class Form1 : Form
     {
+        private int ID; 
+    
         public Form1()
         {
             InitializeComponent();
         }
         private void UpdateListView()
         {
-            ListView.Items.Clear();
+            lv.Items.Clear();
 
             Conexao conn = new Conexao();
             SqlCommand sqlCom = new SqlCommand();
@@ -46,7 +49,7 @@ namespace TestePr2
                     lv.SubItems.Add(tel);
                     
                     
-                   ListView.Items.Add(lv);
+                   this.lv.Items.Add(lv);
 
                 }
                 dr.Close();
@@ -126,6 +129,64 @@ namespace TestePr2
 
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void ListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            Conexao conexao = new Conexao();
+            SqlCommand sqlCommand = new SqlCommand();
+
+            sqlCommand.Connection = conexao.ReturnConnection();
+            sqlCommand.CommandText = @"Update Cadastro SET
+           Email = @Email, 
+           Nome = @Nome,
+           Semha = @Senha 
+           Telefone = @Telefone,
+           Cpf = @CPF,       
+           WHERE Id = @ID";
+
+       
+
+            //@"INSERT INTO Cadastro VALUES(@Email, @Senha, @CPF,@Telefone,@Nome)";
+
+            sqlCommand.Parameters.AddWithValue("@Email", textBox3.Text);
+            sqlCommand.Parameters.AddWithValue("@Nome", textBox1.Text);
+            sqlCommand.Parameters.AddWithValue("@Senha", textBox2.Text);
+            sqlCommand.Parameters.AddWithValue("@Telefone", maskedTextBox1.Text);
+            sqlCommand.Parameters.AddWithValue("@CPF", maskedTextBox2.Text);
+
+
+            sqlCommand.ExecuteNonQuery();
+
+            MessageBox.Show("Cadastrado com sucesso", "AVISO",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Information);
+
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            maskedTextBox1.Clear();
+            maskedTextBox2.Clear();
+
+            UpdateListView();
+        }
+
+        private void ListView_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            int index;
+            index = lv.FocusedItem.Index;
+            ID = int.Parse(lv.Items[index].SubItems[0].Text);
+            textBox3.Text = lv.Items[index].SubItems[1].Text;
+            textBox1.Text = lv.Items[index].SubItems[2].Text;
+            textBox2.Text = lv.Items[index].SubItems[3].Text;
+            maskedTextBox1.Text = lv.Items[index].SubItems[4].Text;
+            maskedTextBox2.Text = lv.Items[index].SubItems[5].Text;
 
         }
     }
