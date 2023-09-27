@@ -29,7 +29,7 @@ namespace TestePr2
 
             sqlCom.Connection = conn.ReturnConnection();
             sqlCom.CommandText = "SELECT * FROM Cadastro";
-
+            // conexão com o sql 
             try
             {
                 SqlDataReader dr = sqlCom.ExecuteReader();
@@ -53,6 +53,7 @@ namespace TestePr2
 
                 }
                 dr.Close();
+                //mostrar as infermações no banco
             }
             catch (Exception err)
             {
@@ -146,9 +147,9 @@ namespace TestePr2
             sqlCommand.CommandText = @"Update Cadastro SET
            Email = @Email, 
            Nome = @Nome,
-           Semha = @Senha 
+           Semha = @Senha,
            Telefone = @Telefone,
-           Cpf = @CPF,       
+           Cpf = @CPF      
            WHERE Id = @ID";
 
        
@@ -160,11 +161,11 @@ namespace TestePr2
             sqlCommand.Parameters.AddWithValue("@Senha", textBox2.Text);
             sqlCommand.Parameters.AddWithValue("@Telefone", maskedTextBox1.Text);
             sqlCommand.Parameters.AddWithValue("@CPF", maskedTextBox2.Text);
-
+            sqlCommand.Parameters.AddWithValue("@ID", ID);
 
             sqlCommand.ExecuteNonQuery();
 
-            MessageBox.Show("Cadastrado com sucesso", "AVISO",
+            MessageBox.Show("Atualizado com sucesso", "AVISO",
             MessageBoxButtons.OK,
             MessageBoxIcon.Information);
 
@@ -187,6 +188,37 @@ namespace TestePr2
             textBox2.Text = lv.Items[index].SubItems[3].Text;
             maskedTextBox1.Text = lv.Items[index].SubItems[4].Text;
             maskedTextBox2.Text = lv.Items[index].SubItems[5].Text;
+
+        }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            Conexao connection = new Conexao();
+            SqlCommand sqlCommand = new SqlCommand();
+
+            sqlCommand.Connection= connection.ReturnConnection();
+            sqlCommand.CommandText = @"DELETE FROM Cadastro WHERE Id = @ID";
+            sqlCommand.Parameters.AddWithValue("@ID", ID);
+            try
+            {
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception err)
+            {
+                throw new Exception("Erro: Problemas ao excluir usuário no banco.\n" + err.Message);
+            }
+            finally
+            {
+                connection.CloseConnection();
+
+                textBox1.Clear();
+                textBox2.Clear();
+                textBox3.Clear();
+                maskedTextBox1.Clear();
+                maskedTextBox2.Clear();
+
+                UpdateListView();
+            }
 
         }
     }
