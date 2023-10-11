@@ -38,18 +38,21 @@ namespace TestePr2
                 while (dr.Read())
                 {
                     int id = (int)dr["ID"];
+                    string email = (string)dr["Email"];
                     string name = (string)dr["Nome"];
-                   
+                    string senha = (string)dr["Senha"];
                     string tel = (string)dr["Telefone"];
-                   
+                    string cpf = (string)dr["CPF"];
 
                     ListViewItem lv = new ListViewItem(id.ToString());
+                    lv.SubItems.Add(email);
                     lv.SubItems.Add(name);
-                    
+                    lv.SubItems.Add(senha);
                     lv.SubItems.Add(tel);
-                    
-                    
-                   this.lv.Items.Add(lv);
+                    lv.SubItems.Add(cpf);
+
+
+                    this.lv.Items.Add(lv);
 
                 }
                 dr.Close();
@@ -68,23 +71,25 @@ namespace TestePr2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Conexao conexao = new Conexao();
-            SqlCommand sqlCommand = new SqlCommand();
+            try
+            {
 
-            sqlCommand.Connection = conexao.ReturnConnection();
-            sqlCommand.CommandText = @"INSERT INTO Cadastro VALUES(@Email, @Senha, @CPF,@Telefone,@Nome)";
+                //vriar obj da classe user
+                User user = new User(textBox1.Text, textBox3.Text, textBox2.Text, maskedTextBox1.Text, maskedTextBox2.Text);
 
-            sqlCommand.Parameters.AddWithValue ("@Email", textBox3.Text);
-            sqlCommand.Parameters.AddWithValue("@Nome", textBox1.Text);
-            sqlCommand.Parameters.AddWithValue("@Senha", textBox2.Text);
-            sqlCommand.Parameters.AddWithValue("@Telefone", maskedTextBox1.Text);
-            sqlCommand.Parameters.AddWithValue("@CPF", maskedTextBox2.Text);
-
-            sqlCommand.ExecuteNonQuery();
+                   UserDAO nomeobj = new UserDAO();
+            nomeobj.InsertUser(user);
 
             MessageBox.Show("Cadastrado com sucesso","AVISO",
             MessageBoxButtons.OK,
             MessageBoxIcon.Information);
+            }
+
+            catch(Exception erro)
+            {
+                MessageBox.Show(erro.Message);
+            }
+         
 
             textBox1.Clear();
             textBox2.Clear();
@@ -193,23 +198,7 @@ namespace TestePr2
 
         private void button1_Click_2(object sender, EventArgs e)
         {
-            Conexao connection = new Conexao();
-            SqlCommand sqlCommand = new SqlCommand();
-
-            sqlCommand.Connection= connection.ReturnConnection();
-            sqlCommand.CommandText = @"DELETE FROM Cadastro WHERE Id = @ID";
-            sqlCommand.Parameters.AddWithValue("@ID", ID);
-            try
-            {
-                sqlCommand.ExecuteNonQuery();
-            }
-            catch (Exception err)
-            {
-                throw new Exception("Erro: Problemas ao excluir usuário no banco.\n" + err.Message);
-            }
-            finally
-            {
-                connection.CloseConnection();
+          
 
                 textBox1.Clear();
                 textBox2.Clear();
@@ -218,7 +207,7 @@ namespace TestePr2
                 maskedTextBox2.Clear();
 
                 UpdateListView();
-            }
+            
 
         }
     }
