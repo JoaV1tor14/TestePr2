@@ -16,7 +16,7 @@ namespace TestePr2
 
 
     {
-        public void List <User> SelectUser()
+        public List<User> SelectUser()
         {
 
             Conexao conn = new Conexao();
@@ -25,6 +25,8 @@ namespace TestePr2
             sqlCom.Connection = conn.ReturnConnection();
             sqlCom.CommandText = "SELECT * FROM Cadastro";
             // conexão com o sql 
+
+            List<User> usuarios = new List<User>();
             try
             {
                 SqlDataReader dr = sqlCom.ExecuteReader();
@@ -32,8 +34,7 @@ namespace TestePr2
                 //Enquanto for possível continuar a leitura das linhas que foram retornadas na consulta, execute.
                 while (dr.Read())
                 {
-                    User objeto = new User(;
-
+                    User objeto = new User(
                     (int)dr["ID"],
                      (string)dr["Email"],
                      (string)dr["Nome"],
@@ -42,22 +43,26 @@ namespace TestePr2
                      (string)dr["CPF"]
                     );
 
-                    ListViewItem lv = new ListViewItem(id.ToString());
-                    lv.SubItems.Add(email);
-                    lv.SubItems.Add(name);
-                    lv.SubItems.Add(senha);
-                    lv.SubItems.Add(tel);
-                    lv.SubItems.Add(cpf);
 
-
-                    this.lv.Items.Add(lv);
-
+                    usuarios.Add(objeto);
                 }
                 dr.Close();
 
 
 
             }
+            catch (Exception err)
+            {
+                throw new Exception(
+                    "Erro na leitura dos dados. \n" +
+                     err.Message);
+            }
+            finally
+            {
+                conn.CloseConnection();
+            }
+            return usuarios;
+           }
         public void InsertUser(User user)
         {
             Conexao conexao = new Conexao();
@@ -66,7 +71,7 @@ namespace TestePr2
             sqlCommand.Connection = conexao.ReturnConnection();
             sqlCommand.CommandText = @"INSERT INTO Cadastro VALUES(@Email, @Senha, @CPF,@Telefone,@Nome)";
 
-            sqlCommand.Parameters.AddWithValue("@Email",user.email);
+            sqlCommand.Parameters.AddWithValue("@Email", user.email);
             sqlCommand.Parameters.AddWithValue("@Nome", user.Name);
             sqlCommand.Parameters.AddWithValue("@Senha", user.senha);
             sqlCommand.Parameters.AddWithValue("@Telefone", user.Telephone);
@@ -75,7 +80,7 @@ namespace TestePr2
             sqlCommand.ExecuteNonQuery();
         }
 
-            public void DeleteUsuario(int ID)
+        public void DeleteUsuario(int ID)
         {
             Conexao connection = new Conexao();
             SqlCommand sqlCommand = new SqlCommand();

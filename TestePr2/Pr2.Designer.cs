@@ -42,13 +42,13 @@
             this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
             this.lv = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Editar = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Editar = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cadastro
@@ -184,28 +184,6 @@
             // 
             this.columnHeader1.Text = "ID";
             // 
-            // Editar
-            // 
-            this.Editar.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.Editar.Location = new System.Drawing.Point(9, 343);
-            this.Editar.Name = "Editar";
-            this.Editar.Size = new System.Drawing.Size(90, 23);
-            this.Editar.TabIndex = 14;
-            this.Editar.Text = "Editar";
-            this.Editar.UseVisualStyleBackColor = false;
-            this.Editar.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.button1.Location = new System.Drawing.Point(105, 314);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(90, 23);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "Excluir";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_2);
-            // 
             // columnHeader7
             // 
             this.columnHeader7.Text = "Email";
@@ -226,13 +204,36 @@
             // 
             this.columnHeader5.Text = "CPF";
             // 
+            // Editar
+            // 
+            this.Editar.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.Editar.Location = new System.Drawing.Point(9, 343);
+            this.Editar.Name = "Editar";
+            this.Editar.Size = new System.Drawing.Size(90, 23);
+            this.Editar.TabIndex = 14;
+            this.Editar.Text = "Editar";
+            this.Editar.UseVisualStyleBackColor = false;
+            this.Editar.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button1.Location = new System.Drawing.Point(105, 314);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(90, 23);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "Excluir";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_2);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1451, 638);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.Editar);

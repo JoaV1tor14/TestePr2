@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace TestePr2
 {
@@ -23,39 +24,27 @@ namespace TestePr2
         private void UpdateListView()
         {
             lv.Items.Clear();
-
-            Conexao conn = new Conexao();
-            SqlCommand sqlCom = new SqlCommand();
-
-            sqlCom.Connection = conn.ReturnConnection();
-            sqlCom.CommandText = "SELECT * FROM Cadastro";
-            // conexão com o sql 
+ 
+        UserDAO userDAO = new UserDAO();
+            List<User> usuarios = userDAO.SelectUser 
             try
             {
-                SqlDataReader dr = sqlCom.ExecuteReader();
-
-                //Enquanto for possível continuar a leitura das linhas que foram retornadas na consulta, execute.
-                while (dr.Read())
+               foreach( User user in usuarios)
                 {
-                    int id = (int)dr["ID"];
-                    string email = (string)dr["Email"];
-                    string name = (string)dr["Nome"];
-                    string senha = (string)dr["Senha"];
-                    string tel = (string)dr["Telefone"];
-                    string cpf = (string)dr["CPF"];
-
-                    ListViewItem lv = new ListViewItem(id.ToString());
-                    lv.SubItems.Add(email);
-                    lv.SubItems.Add(name);
-                    lv.SubItems.Add(senha);
-                    lv.SubItems.Add(tel);
-                    lv.SubItems.Add(cpf);
+                    ListViewItem lv = new ListViewItem(user.Id.ToString());
+                    lv.SubItems.Add(user.email);
+                    lv.SubItems.Add(user.Name);
+                    lv.SubItems.Add(user.senha);
+                    lv.SubItems.Add(user.Telephone);
+                    lv.SubItems.Add(user.Cpf);
 
 
                     this.lv.Items.Add(lv);
 
+
                 }
-                dr.Close();
+
+
                 //mostrar as infermações no banco
             }
             catch (Exception err)
