@@ -79,7 +79,7 @@ namespace TestePr2
 
             sqlCommand.ExecuteNonQuery();
         }
-
+        
         public void DeleteUsuario(int ID)
         {
             Conexao connection = new Conexao();

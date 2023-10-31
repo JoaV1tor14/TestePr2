@@ -15,8 +15,8 @@ namespace TestePr2
 {
     public partial class Form1 : Form
     {
-        private int ID; 
-    
+        private int ID;
+
         public Form1()
         {
             InitializeComponent();
@@ -24,12 +24,12 @@ namespace TestePr2
         private void UpdateListView()
         {
             lv.Items.Clear();
- 
-        UserDAO userDAO = new UserDAO();
-            List<User> usuarios = userDAO.SelectUser 
+
+            UserDAO userDAO = new UserDAO();
+            List<User> usuarios = userDAO.SelectUser();
             try
             {
-               foreach( User user in usuarios)
+                foreach (User user in usuarios)
                 {
                     ListViewItem lv = new ListViewItem(user.Id.ToString());
                     lv.SubItems.Add(user.email);
@@ -51,12 +51,9 @@ namespace TestePr2
             {
                 MessageBox.Show(err.Message);
             }
-            finally
-            {
-                conn.CloseConnection();
-            }
+
         }
-    
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -66,19 +63,19 @@ namespace TestePr2
                 //vriar obj da classe user
                 User user = new User(textBox1.Text, textBox3.Text, textBox2.Text, maskedTextBox1.Text, maskedTextBox2.Text);
 
-                   UserDAO nomeobj = new UserDAO();
-            nomeobj.InsertUser(user);
+                UserDAO nomeobj = new UserDAO();
+                nomeobj.InsertUser(user);
 
-            MessageBox.Show("Cadastrado com sucesso","AVISO",
-            MessageBoxButtons.OK,
-            MessageBoxIcon.Information);
+                MessageBox.Show("Cadastrado com sucesso", "AVISO",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
             }
 
-            catch(Exception erro)
+            catch (Exception erro)
             {
                 MessageBox.Show(erro.Message);
             }
-         
+
 
             textBox1.Clear();
             textBox2.Clear();
@@ -109,7 +106,7 @@ namespace TestePr2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-          UpdateListView();
+            UpdateListView();
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -141,12 +138,12 @@ namespace TestePr2
             sqlCommand.CommandText = @"Update Cadastro SET
            Email = @Email, 
            Nome = @Nome,
-           Semha = @Senha,
+           Senha = @Senha,
            Telefone = @Telefone,
            Cpf = @CPF      
            WHERE Id = @ID";
 
-       
+
 
             //@"INSERT INTO Cadastro VALUES(@Email, @Senha, @CPF,@Telefone,@Nome)";
 
@@ -187,16 +184,18 @@ namespace TestePr2
 
         private void button1_Click_2(object sender, EventArgs e)
         {
-          
 
-                textBox1.Clear();
-                textBox2.Clear();
-                textBox3.Clear();
-                maskedTextBox1.Clear();
-                maskedTextBox2.Clear();
+            UserDAO obj = new UserDAO();
+            obj.DeleteUsuario(ID);
 
-                UpdateListView();
-            
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            maskedTextBox1.Clear();
+            maskedTextBox2.Clear();
+
+            UpdateListView();
+
 
         }
     }
