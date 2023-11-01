@@ -174,8 +174,8 @@ namespace TestePr2
             int index;
             index = lv.FocusedItem.Index;
             ID = int.Parse(lv.Items[index].SubItems[0].Text);
-            textBox3.Text = lv.Items[index].SubItems[1].Text;
-            textBox1.Text = lv.Items[index].SubItems[2].Text;
+            textBox1.Text = lv.Items[index].SubItems[1].Text;
+            textBox3.Text = lv.Items[index].SubItems[2].Text;
             textBox2.Text = lv.Items[index].SubItems[3].Text;
             maskedTextBox1.Text = lv.Items[index].SubItems[4].Text;
             maskedTextBox2.Text = lv.Items[index].SubItems[5].Text;
