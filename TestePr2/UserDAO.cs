@@ -16,6 +16,46 @@ namespace TestePr2
 
 
     {
+        public bool LoginUser(string usuario, string senha)
+        {
+
+            Conexao conn = new Conexao();
+            SqlCommand sqlCom = new SqlCommand();
+
+            sqlCom.Connection = conn.ReturnConnection();
+            sqlCom.CommandText = "SELECT * FROM Cadastro WHERE Nome = @usuario AND  Senha = @senha ";
+            // conexão com o sql 
+
+            sqlCom.Parameters.AddWithValue("@usuario", usuario);
+            sqlCom.Parameters.AddWithValue("@senha", senha);
+
+            try
+            {
+                SqlDataReader dr = sqlCom.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    dr.Close();
+                    return true;
+                }
+
+                dr.Close();
+               
+
+
+            }
+            catch (Exception err)
+            {
+                throw new Exception(
+                    "Erro na leitura dos dados. \n" +
+                     err.Message);
+            }
+            finally
+            {
+                conn.CloseConnection();
+            }
+            return false;
+        }
         public List<User> SelectUser()
         {
 
@@ -62,14 +102,14 @@ namespace TestePr2
                 conn.CloseConnection();
             }
             return usuarios;
-           }
+        }
         public void InsertUser(User user)
         {
             Conexao conexao = new Conexao();
             SqlCommand sqlCommand = new SqlCommand();
 
             sqlCommand.Connection = conexao.ReturnConnection();
-            sqlCommand.CommandText = @"INSERT INTO Cadastro VALUES(@Email, @Senha, @CPF,@Telefone,@Nome)";
+            sqlCommand.CommandText = @"INSERT INTO Cadastro VALUES(@Email,@Nome, @Senha, @CPF,@Telefone,)";
 
             sqlCommand.Parameters.AddWithValue("@Email", user.email);
             sqlCommand.Parameters.AddWithValue("@Nome", user.Name);
@@ -79,7 +119,7 @@ namespace TestePr2
 
             sqlCommand.ExecuteNonQuery();
         }
-        
+
         public void DeleteUsuario(int ID)
         {
             Conexao connection = new Conexao();

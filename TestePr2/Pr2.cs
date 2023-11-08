@@ -147,8 +147,8 @@ namespace TestePr2
 
             //@"INSERT INTO Cadastro VALUES(@Email, @Senha, @CPF,@Telefone,@Nome)";
 
-            sqlCommand.Parameters.AddWithValue("@Email", textBox3.Text);
-            sqlCommand.Parameters.AddWithValue("@Nome", textBox1.Text);
+            sqlCommand.Parameters.AddWithValue("@Email", textBox1.Text);
+            sqlCommand.Parameters.AddWithValue("@Nome", textBox3.Text);
             sqlCommand.Parameters.AddWithValue("@Senha", textBox2.Text);
             sqlCommand.Parameters.AddWithValue("@Telefone", maskedTextBox1.Text);
             sqlCommand.Parameters.AddWithValue("@CPF", maskedTextBox2.Text);
